@@ -1,16 +1,23 @@
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getBlog} from "../../../services/BlogServices";
+import {login} from "../../../services/userServices";
 
 export default function ListBlog(){
     const dispatch = useDispatch();
     const blogs = useSelector(state =>{
-        console.log(state.blog.blogs)
+        console.log(state)
         return state.blog.blogs;
     })
 
     useEffect(()=>{
         dispatch(getBlog());
+    }, [])
+    useEffect(()=>{
+        dispatch(login({
+            name: "KA",
+            password: "123456"
+        }));
     }, [])
 
     return(

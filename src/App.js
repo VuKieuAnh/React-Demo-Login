@@ -12,16 +12,16 @@ import {useEffect} from "react";
 import {getBlog} from "./services/BlogServices";
 
 function App() {
-    const  dispatch = useDispatch();
-    const blogs = useSelector(
-        state => {
-            console.log(state)
-            return state;
-        }
-    )
-    useEffect(()=>{
-        dispatch(getBlog())
-    }, [])
+    // const  dispatch = useDispatch();
+    // const blogs = useSelector(
+    //     state => {
+    //         console.log(state)
+    //         return state;
+    //     }
+    // )
+    // useEffect(()=>{
+    //     dispatch(getBlog())
+    // }, [])
   return (
     <>
       <div className='container-fluid'>

@@ -1,35 +1,34 @@
 import {Link} from "react-router-dom";
+import {Field, Form, Formik} from "formik";
+import {useDispatch} from "react-redux";
+import {login} from "../services/userServices";
 
 export default function Login(){
-    //15ph
+    const dispatch = useDispatch();
     return(
         <>
             <div className={'row'}>
                 <div className="offset-3 col-6">
                     <h1>Login form</h1>
-
-                    <form>
+                    <Formik initialValues={{name: '', password: ''}} onSubmit={values => {
+                        dispatch(login(values));
+                        console.log(values)
+                    }}>
+                    <Form>
                         <div className="mb-3">
                             <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-                            <input type="email" className="form-control" id="exampleInputEmail1"
-                                   aria-describedby="emailHelp"/>
-                                <div id="emailHelp" className="form-text">We'll never share your email with anyone
-                                    else.
-                                </div>
+                            <Field type="text" classname={'form-control'} name={'name'}/>
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                            <input type="password" className="form-control" id="exampleInputPassword1"/>
-                        </div>
-                        <div className="mb-3 form-check">
-                            <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
-                                <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
+                            <label htmlFor="exampleInputPassword1" className="form-label" >Password</label>
+                            <Field type="password" classname={'form-control'} name={'password'}/>
                         </div>
                         <button type="submit" className="btn btn-primary">Submit</button>
                          | <button type="button" className="btn btn-info">
                             <Link to={'/register'}>Register</Link>
                         </button>
-                    </form>
+                    </Form>
+                    </Formik>
                 </div>
             </div>
         </>
