@@ -1,18 +1,23 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Field, Form, Formik} from "formik";
 import {useDispatch} from "react-redux";
 import {login} from "../services/userServices";
 
 export default function Login(){
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const handleLogin = (values)=>{
+        dispatch(login(values));
+        console.log(values)
+        navigate('/home');
+    }
     return(
         <>
             <div className={'row'}>
                 <div className="offset-3 col-6">
                     <h1>Login form</h1>
                     <Formik initialValues={{name: '', password: ''}} onSubmit={values => {
-                        dispatch(login(values));
-                        console.log(values)
+                        handleLogin(values)
                     }}>
                     <Form>
                         <div className="mb-3">

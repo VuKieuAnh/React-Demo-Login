@@ -10,15 +10,19 @@ export default function ListBlog(){
         return state.blog.blogs;
     })
 
+    const user = useSelector(state => {
+        console.log(state)
+        return state.user.currentUser
+    })
     useEffect(()=>{
         dispatch(getBlog());
     }, [])
-    useEffect(()=>{
-        dispatch(login({
-            name: "KA",
-            password: "123456"
-        }));
-    }, [])
+    // useEffect(()=>{
+    //     dispatch(login({
+    //         name: "KA",
+    //         password: "123456"
+    //     }));
+    // }, [])
 
     return(
         <>
@@ -34,14 +38,22 @@ export default function ListBlog(){
                         </tr>
                         </thead>
                         <tbody>
-                        {blogs.map(item =>(
-                            <tr>
-                                <td scope="row">{item.userId}</td>
-                                <td>{item.title}</td>
-                                <td>Sua</td>
-                                <td>Xoa</td>
-                            </tr>
-                        ))}
+                        {blogs.map((item, index) =>{
+                           if (item.user.name == user.name)
+                               return (
+                                   <tr>
+
+                                       <td scope="row">{item.userId}</td>
+                                       <td>{item.title}</td>
+                                       <td>Sua</td>
+                                       <td>Xoa</td>
+                                   </tr>
+                               )
+                           else {
+                               return (<></>)
+                           }
+                        }
+                        )}
                         </tbody>
                     </table>
                 </div>

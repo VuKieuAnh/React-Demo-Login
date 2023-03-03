@@ -8,3 +8,10 @@ export const getBlog = createAsyncThunk(
         return res.data
     }
 )
+export const createBlog = createAsyncThunk(
+    'blogs/creatBlog',
+    async (data)=>{
+        const res= await axios.get("https://jsonplaceholder.typicode.com/posts", data);
+        return data
+    }
+)
