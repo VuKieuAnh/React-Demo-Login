@@ -1,7 +1,8 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 
 export default function Navbar(){
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector(state => {
         console.log(state)
@@ -49,10 +50,13 @@ export default function Navbar(){
                                    {/*<input classNsame="form-control mr-sm-2" type="search" placeholder="Search"*/}
                                    {/*       aria-label="Search"/>*/}
                                    {user.username}
-                                   <Link to={'/login'}>
-                                       <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Logout
+                                   {/*<Link to={'/login'}>*/}
+                                       <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={()=>{
+                                           localStorage.removeItem("user")
+                                           navigate('/home')
+                                       }}>Logout
                                        </button>
-                                   </Link>
+                                   {/*</Link>*/}
 
                                </form>
                            </div>

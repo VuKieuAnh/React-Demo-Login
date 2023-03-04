@@ -12,26 +12,29 @@ import {useEffect} from "react";
 import {getBlog} from "./services/BlogServices";
 
 function App() {
-    // const  dispatch = useDispatch();
-    // const blogs = useSelector(
-    //     state => {
-    //         console.log(state)
-    //         return state;
-    //     }
-    // )
-    // useEffect(()=>{
-    //     dispatch(getBlog())
-    // }, [])
+    const user = useSelector(state => {
+        console.log(state)
+        return state.user.currentUser
+    })
   return (
     <>
       <div className='container-fluid'>
           <Routes>
               <Route path={'login'} element={<Login></Login>}></Route>
               <Route path={'register'} element={<Register></Register>}></Route>
-              <Route path={'home'} element={<Home></Home>}>
+              {
+                  user.username != null?
+                  <Route path={'home'} element={<Home></Home>}>
                   <Route path={''} element={<ListBlog></ListBlog>}></Route>
                   <Route path={'create-blogs'} element={<AddBlog></AddBlog>}></Route>
-              </Route>
+                  </Route>
+                  :
+                      <Route path={'/login'} element={<Login></Login>}></Route>
+              }
+
+
+
+
           </Routes>
       </div>
     </>

@@ -6,10 +6,10 @@ import {login} from "../services/userServices";
 export default function Login(){
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const handleLogin = (values)=>{
-        dispatch(login(values));
+    const handleLogin = async (values) => {
+        await dispatch(login(values))
         console.log(values)
-        navigate('/home');
+        await navigate('/home')
     }
     return(
         <>
